@@ -91,7 +91,7 @@ class Scoreboard extends Base;
   
 endclass : Scoreboard
 
-module SystolicArray_TB
+module Systolic_Array_TB
   #(parameter WIDTH = 32, 
                 SIZE = 8);
 
@@ -198,4 +198,4 @@ module SystolicArray_TB
         $finish;
     end
 
-endmodule : SystolicArray_TB 
+endmodule : Systolic_Array_TB 
