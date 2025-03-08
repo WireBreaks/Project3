@@ -12,7 +12,7 @@
 `timescale 1 ps / 1 ps
 
 module Systolic_Array #(parameter WIDTH = 8, SIZE = 32) (
-  	input logic clock,
+  	input logic clk,
   	input logic reset_n, 
     input logic sa_load,            // Systolic Array load enable
     input logic sa_clear,           // Systolic Array clear enable
@@ -32,7 +32,7 @@ module Systolic_Array #(parameter WIDTH = 8, SIZE = 32) (
         for (i = 0; i < SIZE; i++) begin : PE_ROWS
             for (j = 0; j < SIZE; j++) begin : PE_COLUMNS
                 PE #(WIDTH) PE_inst
-                    (.clock           (clock),           // Clock signal
+                    (.clk             (clk),           // Clock signal
                      .reset_n         (reset_n),         // Asynchronous reset signal (active low)
                      .load            (sa_load),         // Load signal for PE accumulator
                      .clear           (sa_clear),        // Clear signal to reset PE
