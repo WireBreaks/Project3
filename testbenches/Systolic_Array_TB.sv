@@ -95,7 +95,7 @@ module Systolic_Array_TB
   #(parameter WIDTH = 32, 
                 SIZE = 8);
 
-    logic clock, reset_n;
+    logic clk, reset_n;
     logic sa_load;            // Systolic Array load enable
     logic sa_clear;           // Systolic Array clear enable
   	logic sa_carry_en [SIZE-1:0];
@@ -111,8 +111,8 @@ module Systolic_Array_TB
   	Driver dr = new();
 
     initial begin 
-        clock = 1;
-        forever #5 clock = ~clock;
+        clk = 1;
+        forever #5 clk = ~clk;
     end
 
     task automatic t_reset_dut();
@@ -130,7 +130,7 @@ module Systolic_Array_TB
         sa_clear <= 1;                
         f_show_value_for(CLEAR);
       	sb.f_clear_partial_sum();
-        @(posedge clock);
+        @(posedge clk);
         sa_clear <= 0;               
     endtask 
   
@@ -142,7 +142,7 @@ module Systolic_Array_TB
             $display("Row Data for Clock Edge %0d", SIZE - 1 - col);
             f_show_value_for(ROWS);
             sa_carry_en[col] <= 1; 			
-            @(posedge clock);
+            @(posedge clk);
         end
     endtask 
   
@@ -155,7 +155,7 @@ module Systolic_Array_TB
           sb.f_accumulate_partial_sums(row, dr.input_data, dr.weight_data);
         end
 
-        @(posedge clock);
+        @(posedge clk);
     endtask 
 
   	function void f_show_value_for(display_t show);
@@ -176,17 +176,17 @@ module Systolic_Array_TB
         $display("***********************************************");
         t_reset_dut();
 
-        @(posedge clock);
+        @(posedge clk);
         repeat (10) begin 
             t_input_data();
         end
         
         sa_load <= 1;           
-        @(posedge clock);
+        @(posedge clk);
         t_carry_results();
         
         repeat (10) begin 
-          @(posedge clock);
+          @(posedge clk);
         end
 
         sb.f_check_results();
