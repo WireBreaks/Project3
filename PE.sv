@@ -1,6 +1,6 @@
 module PE 
 	#(parameter WIDTH = 32)(
-	input logic clock, reset_n, load, clear, carry_enable,
+	input logic clk, reset_n, load, clear, carry_enable,
 	input logic [WIDTH-1:0] data_in, weight, result_carry,
 	output logic [WIDTH-1:0] result, weight_carry, data_in_carry);
 	
@@ -11,7 +11,7 @@ module PE
 			.datab(weight),
 			.result(mult_result));
 
-	always_ff @(posedge clock or negedge reset_n) begin 
+	always_ff @(posedge clk or negedge reset_n) begin 
 		if (!reset_n) 					accumulator <= '0;
 		else if (!load && !clear) 		accumulator <= accumulator + mult_result;
 		else if (load && !clear) 		accumulator <= accumulator;
