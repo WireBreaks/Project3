@@ -6,7 +6,7 @@ module PE
 	
 	logic [WIDTH-1:0] mult_result, accumulator;
   
-	LE_Multiplier #(WIDTH, WIDTH*2) Mult (
+	DSP_MULTIPLIER #(WIDTH, WIDTH*2) Mult (
 			.dataa(data_in),
 			.datab(weight),
 			.result(mult_result));
